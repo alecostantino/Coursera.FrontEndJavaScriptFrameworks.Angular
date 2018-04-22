@@ -36,6 +36,7 @@ import { ContactComponent } from './contact/contact.component';
 
 import { DishService } from './services/dish.service';
 import { PromotionService } from './services/promotion.service';
+import { LeaderService } from './services/leader.service';//assignment 2 - task 1
 
 @NgModule({
   declarations: [
@@ -71,7 +72,7 @@ import { PromotionService } from './services/promotion.service';
     FlexLayoutModule,
     AppRoutingModule
   ],
-  providers: [DishService, PromotionService],
+  providers: [DishService, PromotionService, LeaderService],//assignment 2 - task 1
   bootstrap: [AppComponent]
 })
 export class AppModule { }
