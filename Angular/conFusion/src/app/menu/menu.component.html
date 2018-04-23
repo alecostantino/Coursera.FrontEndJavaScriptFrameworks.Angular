@@ -23,7 +23,7 @@
       <hr>
     </div>
   </div>
-  <div fxFlex>
+  <div fxFlex *ngIf="dishes">
     <mat-grid-list cols="2" rowHeight="200px">
       <!--<mat-grid-tile *ngFor="let dish of dishes" (click)="onSelect(dish)">-->
       <mat-grid-tile *ngFor="let dish of dishes" [routerLink]="['/dishdetail', dish.id]">
@@ -53,7 +53,9 @@
       </mat-card-actions>
     </mat-card>
   </div>-->
-
-    <!--assignment 1 - task 1-->
-    <!--<app-dishdetail [dish]="selectedDish"></app-dishdetail>-->
+  <div [hidden]="dishes">
+    <mat-spinner></mat-spinner><h4>Loading . . . Please Wait</h4>
+  </div>
+  <!--assignment 1 - task 1-->
+  <!--<app-dishdetail [dish]="selectedDish"></app-dishdetail>-->
 </div>
