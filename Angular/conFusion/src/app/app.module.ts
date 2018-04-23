@@ -22,6 +22,7 @@ import {
 } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { AppRoutingModule } from './app-routing/app-routing.module';
+import { FormsModule } from '@angular/forms'; 
 
 import 'hammerjs';
 
@@ -33,10 +34,11 @@ import { FooterComponent } from './footer/footer.component';
 import { AboutComponent } from './about/about.component';
 import { HomeComponent } from './home/home.component';
 import { ContactComponent } from './contact/contact.component';
+import { LoginComponent } from './login/login.component';//assignment 2 - task 1
 
 import { DishService } from './services/dish.service';
 import { PromotionService } from './services/promotion.service';
-import { LeaderService } from './services/leader.service';//assignment 2 - task 1
+import { LeaderService } from './services/leader.service';
 
 @NgModule({
   declarations: [
@@ -47,7 +49,8 @@ import { LeaderService } from './services/leader.service';//assignment 2 - task 
     FooterComponent,
     AboutComponent,
     HomeComponent,
-    ContactComponent
+    ContactComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -70,7 +73,11 @@ import { LeaderService } from './services/leader.service';//assignment 2 - task 
     MatProgressSpinnerModule,
     MatDialogModule,
     FlexLayoutModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule 
+  ],
+  entryComponents: [
+    LoginComponent
   ],
   providers: [DishService, PromotionService, LeaderService],//assignment 2 - task 1
   bootstrap: [AppComponent]
