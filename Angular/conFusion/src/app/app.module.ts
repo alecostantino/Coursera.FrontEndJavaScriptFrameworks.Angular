@@ -24,8 +24,11 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { AppRoutingModule } from './app-routing/app-routing.module';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
+import { HttpModule } from '@angular/http';
 
 import 'hammerjs';
+
+import { baseURL } from './shared/baseurl';
 
 import { AppComponent } from './app.component';
 import { MenuComponent } from './menu/menu.component';
@@ -40,6 +43,7 @@ import { LoginComponent } from './login/login.component';//assignment 2 - task 1
 import { DishService } from './services/dish.service';
 import { PromotionService } from './services/promotion.service';
 import { LeaderService } from './services/leader.service';
+import { ProcessHttpMsgService } from './services/process-httpmsg.service';
 
 @NgModule({
   declarations: [
@@ -76,12 +80,19 @@ import { LeaderService } from './services/leader.service';
     FlexLayoutModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpModule
   ],
   entryComponents: [
     LoginComponent
   ],
-  providers: [DishService, PromotionService, LeaderService],//assignment 2 - task 1
+  providers: [
+    DishService,
+    PromotionService,
+    LeaderService,
+    { provide: 'BaseURL', useValue: baseURL },
+    ProcessHttpMsgService
+  ],//assignment 2 - task 1
   bootstrap: [AppComponent]
 })
 export class AppModule { }
