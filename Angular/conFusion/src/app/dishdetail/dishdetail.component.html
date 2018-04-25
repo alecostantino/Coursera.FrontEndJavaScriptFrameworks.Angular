@@ -9,7 +9,6 @@
   <!-- assignment 1 - task 2 -->
   <div fxFlex="40" *ngIf="dish">
     <!--<p>Display the details of the Dish here</p>-->
-
     <mat-card>
       <mat-card-header>
         <mat-card-title>
@@ -30,11 +29,10 @@
         <span class="flex-spacer"></span>
         <button mat-button [routerLink]="['/dishdetail', next]"><span class="fa fa-chevron-right fa-lg"></span></button>
       </mat-card-actions>
-      
-    </mat-card>
 
+    </mat-card>
   </div>
-  <div fxFlex="40" *ngIf="dish">
+  <div fxFlex *ngIf="dish">
     <!--<p>Display the list of comments here</p>-->
     <!-- assignment 1 - task 3 -->
     <p><strong>Comments</strong></p>
@@ -45,10 +43,55 @@
         <p mat-line><span>{{comment.rating}} stars</span></p>
         <p mat-line>
           <span>-- {{comment.author}}  {{comment.date | date}} </span>
-          <span></span>
         </p>
       </mat-list-item>
     </mat-list>
+    <!-- Assignment 3 - Task 3-->
+    <mat-list fxFlex *ngIf="commentsForm.valid">
+      <mat-list-item>
+        <p mat-line>{{comment.comment}}</p>
+        <p mat-line><span>{{comment.rating}} stars</span></p>
+        <p mat-line>
+          <span>-- {{comment.author}} </span>
+        </p>
+      </mat-list-item>
+    </mat-list>
+
+    <!-- Assignment 3 - Tasks 1 and 2-->
+    <!--<hr />-->
+    <div class="container"
+     fxLayout="column"
+     fxLayout.sm="column"
+     fxLayout.xs="column">
+      <!--<h3>Input your Comments</h3>
+    <p>{{ commentsForm.value | json }} {{ commentsForm.status | json }}</p>-->
+      <form novalidate [formGroup]="commentsForm" (ngSubmit)="onSubmit()" class="full-width" fxFlex fxFlexDirection>
+        <p>
+          <mat-form-field class="full-width"
+                          dividerColor="{{(formErrors.author) ? 'warn' : 'primary'}}">
+            <input matInput formControlName="author" placeholder="Name" type="text" required>
+            <mat-hint>
+              <span [hidden]="!(formErrors.author)">
+                {{formErrors.author}}
+              </span>
+            </mat-hint>
+          </mat-form-field>
+        </p>
+        <p>
+          <mat-slider formControlName="rating" min="1" max="5" step="1" thumbLabel tickInterval="1"></mat-slider>
+        <p>
+          <mat-form-field class="full-width">
+            <textarea matInput formControlName="comment" placeholder="Your Comment" rows="5" required></textarea>
+            <mat-hint>
+              <span [hidden]="!(formErrors.comment)">
+                {{formErrors.comment}}
+              </span>
+            </mat-hint>
+          </mat-form-field>
+        </p>
+        <button type="submit" mat-button class="background-primary text-floral-white" [disabled]="commentsForm.invalid">Submit</button>
+      </form>
+    </div>
   </div>
   <div [hidden]="dish">
     <mat-spinner></mat-spinner><h4>Loading . . . Please Wait</h4>
