@@ -45,10 +45,8 @@
           <span>-- {{comment.author}}  {{comment.date | date}} </span>
         </p>
       </mat-list-item>
-    </mat-list>
-    <!-- Assignment 3 - Task 3-->
-    <mat-list fxFlex *ngIf="commentsForm.valid">
-      <mat-list-item>
+      <!-- Assignment 3 - Task 3-->
+      <mat-list-item *ngIf="commentsForm.valid">
         <p mat-line>{{comment.comment}}</p>
         <p mat-line><span>{{comment.rating}} stars</span></p>
         <p mat-line>
