@@ -54,8 +54,12 @@
       </mat-card-actions>
     </mat-card>
   </div>-->
-  <div [hidden]="dishes">
+  <div [hidden]="dishes || errMess">
     <mat-spinner></mat-spinner><h4>Loading . . . Please Wait</h4>
+  </div>
+  <div *ngIf="errMess">
+    <h2>Error</h2>
+    <h4>{{errMess}}</h4>
   </div>
   <!--assignment 1 - task 1-->
   <!--<app-dishdetail [dish]="selectedDish"></app-dishdetail>-->

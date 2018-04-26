@@ -27,10 +27,11 @@ export class DishdetailComponent implements OnInit {
   dishIds: number[];
   prev: number;
   next: number;
-//Assignment 3 - Task 2
+  //Assignment 3 - Task 2
   commentsForm: FormGroup;
   comment: Comment;
-
+  errMess: string;
+  
   formErrors = {
     'rating': '',
     'comment': '',
@@ -66,10 +67,15 @@ export class DishdetailComponent implements OnInit {
 
     this.dish = null;
 
-    this.dishservice.getDishIds().subscribe(dishIds => this.dishIds = dishIds);
+    this.dishservice.getDishIds().subscribe(
+      dishIds => this.dishIds = dishIds,
+      errMess => this.errMess = errMess);
+
     this.route.params
-      .switchMap((params: Params) => this.dishservice.getDish(+params['id']))
-      .subscribe(dish => { this.dish = dish; this.setPrevNext(dish.id); });
+      .switchMap((params: Params) =>
+        this.dishservice.getDish(+params['id'])).subscribe(
+      dish => { this.dish = dish; this.setPrevNext(dish.id); },
+      errMess => this.errMess = errMess);
     //Assignment 3 - Task 2
     this.createForm();
   }

@@ -59,11 +59,11 @@
     <!-- Assignment 3 - Tasks 1 and 2-->
     <!--<hr />-->
     <div class="container"
-     fxLayout="column"
-     fxLayout.sm="column"
-     fxLayout.xs="column">
+         fxLayout="column"
+         fxLayout.sm="column"
+         fxLayout.xs="column">
       <!--<h3>Input your Comments</h3>
-    <p>{{ commentsForm.value | json }} {{ commentsForm.status | json }}</p>-->
+      <p>{{ commentsForm.value | json }} {{ commentsForm.status | json }}</p>-->
       <form novalidate [formGroup]="commentsForm" (ngSubmit)="onSubmit()" class="full-width" fxFlex fxFlexDirection>
         <p>
           <mat-form-field class="full-width"
@@ -92,8 +92,15 @@
       </form>
     </div>
   </div>
-  <div [hidden]="dish">
+
+  <div [hidden]="(dishIds && dish) || errMess">
     <mat-spinner></mat-spinner><h4>Loading . . . Please Wait</h4>
   </div>
+  <div *ngIf="errMess">
+    <h2>Error</h2>
+    <h4>{{errMess}}</h4>
+  </div>
+
+
 </div>
 
