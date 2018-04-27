@@ -39,6 +39,12 @@
           "comment": "It's your birthday, we're gonna party!",
           "author": "25 Cent",
           "date": "2011-12-02T17:57:28.556094Z"
+        },
+        {
+          "comment": "Test Comment",
+          "author": "Test Author",
+          "rating": 5,
+          "date": "2018-04-27T21:07:28.867Z"
         }
       ]
     },
@@ -81,6 +87,12 @@
           "comment": "It's your birthday, we're gonna party!",
           "author": "25 Cent",
           "date": "2011-12-02T17:57:28.556094Z"
+        },
+        {
+          "comment": "Anything",
+          "author": "Alejandro",
+          "rating": 5,
+          "date": "2018-04-27T21:02:10.962Z"
         }
       ]
     },
