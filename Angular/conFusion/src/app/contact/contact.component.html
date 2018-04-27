@@ -124,7 +124,7 @@
         </td>
         <td>
           <mat-select placeholder="How?" formControlName="contacttype">
-            <mat-option *ngFor="let ctype of contactType" [value]="ctype">
+            <mat-option *ngFor="let ctype of contactTypes" [value]="ctype">
               {{ ctype }}
             </mat-option>
           </mat-select>
@@ -187,7 +187,7 @@
         </td>
         <td>
           <mat-select placeholder="How?" formControlName="contacttype">
-            <mat-option *ngFor="let ctype of contactType" [value]="ctype">
+            <mat-option *ngFor="let ctype of contactTypes" [value]="ctype">
               {{ ctype }}
             </mat-option>
           </mat-select>
