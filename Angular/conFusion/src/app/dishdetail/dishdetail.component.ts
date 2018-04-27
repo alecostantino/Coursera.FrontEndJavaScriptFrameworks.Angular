@@ -149,11 +149,16 @@ export class DishdetailComponent implements OnInit {
     //this.dish.comments.push(this.comment);
 
     this.dishcopy.comments.push(this.comment);
-    this.dishcopy.save()
-      .subscribe(dish => {
-        this.dish = dish;
-        console.log(this.dish);
-      });
+
+    this.dishservice.saveDish(this.dishcopy).subscribe(dish => {
+      this.dish = dish;
+      console.log(this.dish);
+    });
+    //this.dishcopy.save()
+    //  .subscribe(dish => {
+    //    this.dish = dish;
+    //    console.log(this.dish);
+    //  });
 
     this.commentsForm.reset({
       comment: '',

@@ -158,4 +158,8 @@ export class DishService {
       //.catch(error => { return error; });
   }
 
+  saveDish(dish: any) {
+    return dish.save(); //this.restangular.save('dishes', dish.id).get();
+  }
+
 }
