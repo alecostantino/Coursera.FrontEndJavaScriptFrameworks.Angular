@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-//import { Material } from '@angular/material';
+//import { MaterialModule } from '@angular/material';
 import {
   MatButtonModule,
   MatCheckboxModule,
