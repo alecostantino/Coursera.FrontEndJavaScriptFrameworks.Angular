@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Feedback, ContactTypes } from '../shared/feedback';
-import { flyInOut } from '../animations/app.animation';
+import { flyInOut, expand } from '../animations/app.animation';
+import { FeedbackService } from '../services/feedback.service';
 
 @Component({
   selector: 'app-contact',
@@ -12,10 +13,13 @@ import { flyInOut } from '../animations/app.animation';
     'style': 'display: block;'
   },
   animations: [
-    flyInOut()
+    flyInOut(),
+    expand()
   ]
 })
 export class ContactComponent implements OnInit {
+  errorMessage: string;
+  isFormBeingSubmitted: boolean;
 
   feedbackForm: FormGroup;
   feedback: Feedback;
@@ -49,7 +53,10 @@ export class ContactComponent implements OnInit {
     },
   };
 
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    private feedbackService: FeedbackService) {
+
     this.createForm();
   }
 
@@ -84,6 +91,8 @@ export class ContactComponent implements OnInit {
     //  contacttype: 'None',
     //  message: ''
     //});
+    this.isFormBeingSubmitted = false;
+
     this.feedbackForm = this.fb.group({
       firstname: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(25)]],
       lastname: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(25)]],
@@ -122,17 +131,37 @@ export class ContactComponent implements OnInit {
   }
 
   onSubmit() {
-    this.feedback = this.feedbackForm.value;
-    console.log(this.feedback);
-    this.feedbackForm.reset({
-      firstname: '',
-      lastname: '',
-      telnum: '',
-      email: '',
-      agree: false,
-      contacttype: 'None',
-      message: ''
-    });
-  }
+    this.isFormBeingSubmitted = true;
 
+    // Assignment 4 - Task 3
+    this.feedbackService.submitFeedback(this.feedbackForm.value).subscribe(
+      postedFeedback => {
+        // Asignment 4 - Task 4
+        this.feedback = postedFeedback;
+        this.isFormBeingSubmitted = false;
+
+        console.log(postedFeedback);
+
+        this.feedbackForm.reset({
+          firstname: '',
+          lastname: '',
+          telnum: '',
+          email: '',
+          agree: false,
+          contacttype: 'None',
+          message: ''
+        });
+
+        // Asignment 4 - Task 4
+        setTimeout(() => {
+          this.feedback = null;          
+        }, 5000);
+      },
+      error => {
+        this.isFormBeingSubmitted = false;// Asignment 4 - Task 4
+
+        this.errorMessage = error;
+        console.log(this.errorMessage);        
+      });
+  }
 }

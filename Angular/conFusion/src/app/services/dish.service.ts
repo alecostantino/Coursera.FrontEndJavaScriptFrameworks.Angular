@@ -3,7 +3,7 @@ import { Dish } from '../shared/dish';
 import { DISHES } from '../shared/dishes';
 import { Http, Response } from '@angular/http';
 //import { baseURL } from '../shared/baseurl';
-//import { ProcessHttpMsgService } from './process-httpmsg.service';
+import { ProcessHttpMsgService } from './process-httpmsg.service';
 import { RestangularModule, Restangular } from 'ngx-restangular';
 
 import { Observable } from 'rxjs/Observable';
@@ -19,7 +19,7 @@ export class DishService {
 
   constructor(
     //private http: Http,
-    //private processHTTPMsgService: ProcessHttpMsgService
+    private processHTTPMsgService: ProcessHttpMsgService,
     private restangular: Restangular) { }
 
   //getDishes(): Dish[] {
@@ -140,26 +140,30 @@ export class DishService {
   //}
 
   getDishes(): Observable<Dish[]> {
-    return this.restangular.all('dishes').getList();
+    return this.restangular.all('dishes').getList()
+      .catch(error => { return this.processHTTPMsgService.handleError(error); });
   }
 
   getDish(id: number): Observable<Dish> {
-    return this.restangular.one('dishes', id).get();
+    return this.restangular.one('dishes', id).get()
+      .catch(error => { return this.processHTTPMsgService.handleError(error); });
   }
 
   getFeaturedDish(): Observable<Dish> {
     return this.restangular.all('dishes').getList({ featured: true })
-      .map(dishes => dishes[0]);
+      .map(dishes => dishes[0])
+      .catch(error => { return this.processHTTPMsgService.handleError(error); });
   }
 
   getDishIds(): Observable<number[]> {
     return this.getDishes()
-      .map(dishes => { return dishes.map(dish => dish.id) });
-      //.catch(error => { return error; });
+      .map(dishes => { return dishes.map(dish => dish.id) })
+      .catch(error => { return this.processHTTPMsgService.handleError(error); });
   }
 
   saveDish(dish: any) {
-    return dish.save(); //this.restangular.save('dishes', dish.id).get();
+    return dish.save() //this.restangular.save('dishes', dish.id).get()
+      .catch(error => { return this.processHTTPMsgService.handleError(error); });
   }
 
 }

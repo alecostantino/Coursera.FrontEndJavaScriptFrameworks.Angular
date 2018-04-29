@@ -47,7 +47,10 @@ import { DishService } from './services/dish.service';
 import { PromotionService } from './services/promotion.service';
 import { LeaderService } from './services/leader.service';
 import { ProcessHttpMsgService } from './services/process-httpmsg.service';
+import { FeedbackService } from './services/feedback.service';
+
 import { HighlightDirective } from './directives/highlight.directive';
+
 
 @NgModule({
   declarations: [
@@ -97,7 +100,8 @@ import { HighlightDirective } from './directives/highlight.directive';
     PromotionService,
     LeaderService,
     { provide: 'BaseURL', useValue: baseURL },
-    ProcessHttpMsgService
+    ProcessHttpMsgService,
+    FeedbackService
   ],//assignment 2 - task 1
   bootstrap: [AppComponent]
 })

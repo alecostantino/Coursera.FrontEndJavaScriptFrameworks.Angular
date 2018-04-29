@@ -19,7 +19,7 @@ import { flyInOut, expand } from '../animations/app.animation';
 export class MenuComponent implements OnInit {
 
   dishes: Dish[];
-  errMess: string;
+  errMess = null;//: string;
 
   //selectedDish: Dish;
 
@@ -36,7 +36,10 @@ export class MenuComponent implements OnInit {
       //function (errmess: any) {
       //  this.errMess = errmess;
       //});
-      errmess => this.errMess = <any>errmess);
+      errmess => {
+        this.errMess = <any>errmess;
+        console.log(this.errMess);
+      });
   }
 
   //onSelect(dish: Dish) {

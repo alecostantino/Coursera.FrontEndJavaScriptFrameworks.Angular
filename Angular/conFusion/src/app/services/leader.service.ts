@@ -6,11 +6,15 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 //import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/delay';
+import { Restangular } from 'ngx-restangular';
+import { ProcessHttpMsgService } from './process-httpmsg.service';
 
 @Injectable()
 export class LeaderService {
 
-  constructor() { }
+  constructor(
+    private processHTTPMsgService: ProcessHttpMsgService,
+    private restangular: Restangular) { }
 
   //getLeader(id: number): Leader {
   //  return LEADERS.filter((leader) => (leader.id === id))[0];
@@ -60,15 +64,31 @@ export class LeaderService {
   //  return Observable.of(LEADERS.filter((leader) => leader.featured)[0]).delay(2000).toPromise();
   //}
 
+  //getLeader(id: number): Observable<Leader> {
+  //  return Observable.of(LEADERS.filter((leader) => (leader.id === id))[0]).delay(2000);
+  //}
+
+  //getLeaders(): Observable<Leader[]> {
+  //  return Observable.of(LEADERS).delay(2000);
+  //}
+
+  //getFeaturedLeader(): Observable<Leader> {
+  //  return Observable.of(LEADERS.filter((leader) => leader.featured)[0]).delay(2000);
+  //}
+
+  // Assignment 4 - Task 2
   getLeader(id: number): Observable<Leader> {
-    return Observable.of(LEADERS.filter((leader) => (leader.id === id))[0]).delay(2000);
+    return this.restangular.one('leaders', id).get()
+      .catch(error => { return this.processHTTPMsgService.handleError(error); });
   }
 
   getLeaders(): Observable<Leader[]> {
-    return Observable.of(LEADERS).delay(2000);
+    return this.restangular.all('leaders').getList()
+      .catch(error => { return this.processHTTPMsgService.handleError(error); });
   }
 
   getFeaturedLeader(): Observable<Leader> {
-    return Observable.of(LEADERS.filter((leader) => leader.featured)[0]).delay(2000);
+    return this.restangular.all('leaders').getList({ featured: true }).map(leaders => leaders[0])
+      .catch(error => { return this.processHTTPMsgService.handleError(error); });
   }
 }
